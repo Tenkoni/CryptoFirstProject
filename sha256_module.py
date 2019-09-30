@@ -5,7 +5,7 @@ from cryptography.hazmat.primitives import hashes
 
 
 def sha256_timer(test_vectors): #the test_vector must have ONLY bytes-type elements
-    """Hash each element of test_vector and returns a list with execution times"""
+	"""Hash each element of test_vector and returns a list with execution times"""
 	time_list = [] #list to save each execution time
 	for vector in test_vectors:
 		start = timer()

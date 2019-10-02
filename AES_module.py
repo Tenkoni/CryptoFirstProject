@@ -13,9 +13,9 @@ def aes_timer(test_vectors):
 	for vector in test_vectors: #test_vector elements are of byte type
 		#key generation, we opted for generating our own keys and not using the provided at the test vectors
 		key = secrets.token_bytes(32) #secrets provides the most secure pseudo-random function the os has
-		print(key)
+		#print(key)
 		iv = secrets.token_bytes(16)
-		print(iv)
+		#print(iv)
 		#end of key generation
 		#creating a cipher object
 		cipher = Cipher(algorithms.AES(key), modes.CBC(iv), backend = default_backend())
@@ -28,7 +28,7 @@ def aes_timer(test_vectors):
 		ciphertext = encryptor.update(padded_m) + encryptor.finalize()
 		end_e = timer()
 		#encryption ends -this is the fragment we should time for encryption time
-		print("ciphertext: " + str(ciphertext))
+		#print("ciphertext: " + str(ciphertext))
 		decryptor = cipher.decryptor()
 		unpadder = padding.PKCS7(256).unpadder() #unpadding object
 		#decryption begins
@@ -37,11 +37,7 @@ def aes_timer(test_vectors):
 		data = unpadder.update(plaintext_d) + unpadder.finalize() #unpadding result
 		end_d = timer()
 		#decryption ends -this is the fragment we should time for decryption time
-		print("Deciphered text: "+ str(data))
+		#print("Deciphered text: "+ str(data))
 		timelist.append((end_e - start_e, end_d - start_d))
 	return (timelist)
-
-benin = [b"Hello, its me, papadopolus", b"tchaikovsky is a hella good composer" ]
-timelist = aes_timer(benin)
-print (timelist)
 

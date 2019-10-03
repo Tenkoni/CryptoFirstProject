@@ -12,7 +12,7 @@ def des_timer(test_vectors):
 		#key creation for DES
 		iv = secrets.token_bytes(8)
 		des_instance = DesKey(secrets.token_bytes(8))
-		print(des_instance.is_single())
+		#print(des_instance.is_single())
 		#creating padding instance
 		padder = padding.PKCS7(64).padder()
 		#encrypting begins (using CBC mode)
@@ -21,7 +21,7 @@ def des_timer(test_vectors):
 		cyphertext = des_instance.encrypt(padded_m, initial = iv)
 		end_e = timer()
 		#encrypting ends, timing this section
-		print(str(cyphertext))
+		#print(str(cyphertext))
 		#creating unpadding instance
 		unpadder = padding.PKCS7(64).unpadder()
 		#decrypting begins 
@@ -30,12 +30,10 @@ def des_timer(test_vectors):
 		plaintext = unpadder.update(plaintext_d) + unpadder.finalize()
 		end_d = timer()
 		#decryption ends
-		print(plaintext)
+		#print(plaintext)
 		timelist.append((end_e - start_e, end_d - start_d))
 	return timelist
 
-benin = [b"heloelelello", b"mahler is also a great composer", b"tuturuuuuufdfsddddddddduuuuuuuuuuuuuuuuuus"]
-print(des_timer(benin))
 
 
 

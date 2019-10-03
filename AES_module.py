@@ -1,4 +1,5 @@
 #AES
+import sys
 import secrets
 from cryptography.hazmat.backends import default_backend
 from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
@@ -14,11 +15,13 @@ def aes_timer(test_vectors):
 		#key generation, we opted for generating our own keys and not using the provided at the test vectors
 		key = secrets.token_bytes(32) #secrets provides the most secure pseudo-random function the os has
 		#print(key)
-		iv = secrets.token_bytes(16)
+		iv = secrets.token_bytes(32)
 		#print(iv)
 		#end of key generation
 		#creating a cipher object
-		cipher = Cipher(algorithms.AES(key), modes.CBC(iv), backend = default_backend())
+		aes = algorithms.AES(key)
+		aes.block_size = 256
+		cipher = Cipher(aes, modes.CBC(iv), backend = default_backend())
 		#creating padding object
 		padder = padding.PKCS7(256).padder()
 		encryptor = cipher.encryptor()
@@ -28,7 +31,7 @@ def aes_timer(test_vectors):
 		ciphertext = encryptor.update(padded_m) + encryptor.finalize()
 		end_e = timer()
 		#encryption ends -this is the fragment we should time for encryption time
-		#print("ciphertext: " + str(ciphertext))
+		#print("ciphertext: " + str(ciphertext.hex()))
 		decryptor = cipher.decryptor()
 		unpadder = padding.PKCS7(256).unpadder() #unpadding object
 		#decryption begins
@@ -39,5 +42,5 @@ def aes_timer(test_vectors):
 		#decryption ends -this is the fragment we should time for decryption time
 		#print("Deciphered text: "+ str(data))
 		timelist.append((end_e - start_e, end_d - start_d))
-	return (timelist)
+	return timelist
 

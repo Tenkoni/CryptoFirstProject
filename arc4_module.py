@@ -20,17 +20,13 @@ def arc4_timer(test_vectors):
 		ciphertext = encryptor.update(vector) + encryptor.finalize()
 		end_e = timer()
 		#encryption ends -this is the fragment we should time for encryption time
-		print("ciphertext: " + str(ciphertext))
+		#print("ciphertext: " + str(ciphertext))
 		decryptor = cipher.decryptor()
 		#decryption begins
 		start_d = timer()
 		plaintext_d = decryptor.update(ciphertext) + decryptor.finalize()
 		end_d = timer()
 		#decryption ends -this is the fragment we should time for decryption time
-		print("Deciphered text: "+ str(plaintext_d))
+		#print("Deciphered text: "+ str(plaintext_d))
 		timelist.append((end_e - start_e, end_d - start_d))
 	return timelist
-
-
-benin = [b"streamstreamebinestreame", b"thisisateststreamjusttoseeifthisworks", b"yayitworks"]
-print(arc4_timer(benin))

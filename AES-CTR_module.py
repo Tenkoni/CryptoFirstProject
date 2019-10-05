@@ -4,7 +4,7 @@ from cryptography.hazmat.backends import default_backend
 from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
 from timeit import default_timer as timer
 
-def aes_ofb_timer(test_vectors):
+def aes_ctr_timer(test_vectors):
 	"""Encrypts (AES-CTR) each element of test_vector and returns a list of tuples with (encryption time, decryption time) """
 	timelist = []
 	for vector in test_vectors: #test_vector elements are of byte type

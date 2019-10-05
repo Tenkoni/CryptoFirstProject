@@ -17,7 +17,7 @@ def rsa_pss_timing(test_vectors):
 		start_s = timer()
 		signature = private_key.sign(vector, paddington, hashes.SHA256())
 		end_s = timer()
-		print(signature.hex())
+		#print(signature.hex())
 		#encryption ends
 		paddington = padding.PSS(mgf = padding.MGF1(algorithm = hashes.SHA256()), salt_length = 20) #if the salt is different the verifying process throws an invalid signature exception
 		#decryption starts
@@ -30,6 +30,3 @@ def rsa_pss_timing(test_vectors):
 		#decryption ends
 		timelist.append((end_s - start_s, end_v - start_v))
 	return timelist
-
-testam = [b"a message to sign", b"another message to sign", b"this is also another message that i wish to sign"]
-print(rsa_pss_timing(testam))

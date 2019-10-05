@@ -15,7 +15,7 @@ def dsa_timing(test_vectors):
 		start_s = timer()
 		signature = private_key.sign(vector, hashes.SHA256())
 		end_s = timer()
-		print(signature.hex())
+		#print(signature.hex())
 		#signing ends
 		#veryifing starts
 		start_v = timer()
@@ -28,6 +28,3 @@ def dsa_timing(test_vectors):
 		timelist.append((end_s - start_s, end_v - start_v))
 	return timelist
 
-
-testo = [b"signature testing", b"also another signature testing", b"and yet we have another test of this signature algorithm named DSA"]
-print(dsa_timing(testo))

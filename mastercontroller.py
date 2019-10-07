@@ -87,6 +87,18 @@ print(format(sum(md5_test)/len(md5_test), '.12f'))
 print(format(sum(sha1_test)/len(sha1_test), '.12f'))
 print(format(sum(sha2_test)/len(sha2_test), '.12f'))
 
+arc4_test = [(format(x[0], '.22f'), format(x[1], '.22f')) for x in arc4_test]
+aes_ctr_test = [(format(x[0], '.22f'), format(x[1], '.22f')) for x in aes_ctr_test]
+aes_ofb_test = [(format(x[0], '.22f'), format(x[1], '.22f')) for x in aes_ofb_test]
+des_test = [(format(x[0], '.22f'), format(x[1], '.22f')) for x in des_test]
+aes_test = [(format(x[0], '.22f'), format(x[1], '.22f')) for x in aes_test]
+rsa_oaep_test = [(format(x[0], '.22f'), format(x[1], '.22f')) for x in rsa_oaep_test]
+md5_test = [format(x[0], '.22f') for x in md5_test]
+sha1_test = [format(x[0], '.22f') for x in sha1_test]
+sha2_test = [format(x[0], '.22f') for x in sha2_test]
+rsa_pss_test = [(format(x[0], '.22f'), format(x[1], '.22f')) for x in rsa_pss_test]
+des_test = [(format(x[0], '.22f'), format(x[1], '.22f')) for x in des_test]
+
 ##creating csv files for each test
 with open ('Results/arc4.csv', 'w') as out:
 	csv_res = csv.writer(out)

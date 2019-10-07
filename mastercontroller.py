@@ -2,6 +2,8 @@
 #In charge of feeding the modules with test vectors properly formated,
 #recopilating the timing data and show significative data obtanied
 #from it. 
+import csv
+
 import des_module as des
 import AES_module as aes
 ctr = __import__ ('AES-CTR_module')
@@ -84,3 +86,70 @@ print("Average Hashing time")
 print(format(sum(md5_test)/len(md5_test), '.12f'))
 print(format(sum(sha1_test)/len(sha1_test), '.12f'))
 print(format(sum(sha2_test)/len(sha2_test), '.12f'))
+
+##creating csv files for each test
+with open ('Results/arc4.csv', 'w') as out:
+	csv_res = csv.writer(out)
+	csv_res.writerow(['Encryption time', 'Decryption Time'])
+	for row in arc4_test:
+		csv_res.writerow(row)
+
+with open ('Results/aes_ctr.csv', 'w') as out:
+	csv_res = csv.writer(out)
+	csv_res.writerow(['Encryption time', 'Decryption Time'])
+	for row in aes_ctr_test:
+		csv_res.writerow(row)
+
+with open ('Results/aes_ofb.csv', 'w') as out:
+	csv_res = csv.writer(out)
+	csv_res.writerow(['Encryption time', 'Decryption Time'])
+	for row in aes_ofb_test:
+		csv_res.writerow(row)
+
+with open ('Results/des.csv', 'w') as out:
+	csv_res = csv.writer(out)
+	csv_res.writerow(['Encryption time', 'Decryption Time'])
+	for row in des_test:
+		csv_res.writerow(row)
+
+with open ('Results/aes.csv', 'w') as out:
+	csv_res = csv.writer(out)
+	csv_res.writerow(['Encryption time', 'Decryption Time'])
+	for row in aes_test:
+		csv_res.writerow(row)
+		
+with open ('Results/rsa_oaep.csv', 'w') as out:
+	csv_res = csv.writer(out)
+	csv_res.writerow(['Encryption time', 'Decryption Time'])
+	for row in rsa_oaep_test:
+		csv_res.writerow(row)
+
+with open ('Results/md5.csv', 'w') as out:
+	csv_res = csv.writer(out)
+	csv_res.writerow(['Hashing time'])
+	for row in md5_test:
+		csv_res.writerow([row])
+
+with open ('Results/sha1.csv', 'w') as out:
+	csv_res = csv.writer(out)
+	csv_res.writerow(['Hashing time'])
+	for row in sha1_test:
+		csv_res.writerow([row])
+		
+with open ('Results/sha2.csv', 'w') as out:
+	csv_res = csv.writer(out)
+	csv_res.writerow(['Hashing time'])
+	for row in sha2_test:
+		csv_res.writerow([row])
+
+with open ('Results/rsa_pss.csv', 'w') as out:
+	csv_res = csv.writer(out)
+	csv_res.writerow(['Signature time', 'Verification Time'])
+	for row in rsa_pss_test:
+		csv_res.writerow(row)
+
+with open ('Results/des.csv', 'w') as out:
+	csv_res = csv.writer(out)
+	csv_res.writerow(['Signature time', 'Verification Time'])
+	for row in des_test:
+		csv_res.writerow(row)

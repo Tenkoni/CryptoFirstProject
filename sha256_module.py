@@ -8,11 +8,11 @@ def sha256_timer(test_vectors): #the test_vector must have ONLY bytes-type eleme
 	"""Hash each element of test_vector and returns a list with execution times"""
 	time_list = [] #list to save each execution time
 	for vector in test_vectors:
-		start = timer()
 		digest = hashes.Hash(hashes.SHA256(), backend = default_backend()) #initialize hash digest
+		start = timer()
 		digest.update(vector) #hash vector
-		a = digest.finalize() #output hash
 		end = timer()
+		a = digest.finalize() #output hash
 		#print(str(vector)+" ->" + str(a.hex())) #aux to verify proper hashing
 		time_list.append(end-start)
 	return(time_list)

@@ -17,35 +17,70 @@ import DSA_module as dsa
 
 ##block for test_vector loading
 ##asume the format of the files is just a 1 test vector by row
-with open("test_vector_name.elf") as tv:
-	test_vector1 = tv.readlines()
-test_vector1 = [bytes.fromhex(x.strip()) for x in test_vector1]
+##each testing group shares a test_vector
+with open("signature_vectors.elf") as tv:
+	sign_vectors = tv.readlines()
+sign_vectors = [bytes.fromhex(x.strip()) for x in sign_vectors]
+tv.close()
+
+with open("block_vectors.elf") as tv:
+	block_vectors = tv.readlines()
+block_vectors = [bytes.fromhex(x.strip()) for x in block_vectors]
+tv.close()
+
+with open("hash_vectors.elf") as tv:
+	hash_vectors = tv.readlines()
+hash_vectors = [bytes.fromhex(x.strip()) for x in hash_vectors]
+tv.close()
 ##
 
 ##modules testing
-arc4_test = arc4.arc4_timer(test_vector1)
-aes_ofb_test = ofb.aes_ofb_timer(test_vector1)
-aes_ctr_test = ctr.aes_ctr_timer(test_vector1)
-des_test = des.des_timer(test_vector1)
-aes_test = aes.aes_timer(test_vector1)
-rsa_oaep_test = oaep.rsa_oaep_timing(test_vector1)
-md5_test = md5.md5_timer(test_vector1)
-sha1_test = sha1.sha1_timer(test_vector1)
-sha2_test = sha2.sha256_timer(test_vector1)
-rsa_pss_test = pss.rsa_pss_timing(test_vector1)
-dsa_test = dsa.dsa_timing(test_vector1)
+print("Testing arc4")
+arc4_test = arc4.arc4_timer(block_vectors)
+print("Testing AES-OFB")
+aes_ofb_test = ofb.aes_ofb_timer(block_vectors)
+print("Testing AES-CTR")
+aes_ctr_test = ctr.aes_ctr_timer(block_vectors)
+print("Testing DES")
+des_test = des.des_timer(block_vectors)
+print("Testing AES")
+aes_test = aes.aes_timer(block_vectors)
+print("Testing RSA-OAEP")
+rsa_oaep_test = oaep.rsa_oaep_timing(block_vectors)
+print("Testing MD5")
+md5_test = md5.md5_timer(hash_vectors)
+print("Testing SHA-1")
+sha1_test = sha1.sha1_timer(hash_vectors)
+print("Testing SHA-2")
+sha2_test = sha2.sha256_timer(hash_vectors)
+print("Testing RSA-PSS")
+rsa_pss_test = pss.rsa_pss_timing(sign_vectors)
+print("Testing DSA")
+dsa_test = dsa.dsa_timing(sign_vectors)
 ##
 ##do something with the data
-print(arc4_test)
-print(aes_ctr_test)
-print(aes_ofb_test)
-print(des_test)
-print(aes_test)
-print(rsa_oaep_test)
-print(rsa_pss_test)
-print(md5_test)
-print(sha1_test)
-print(sha2_test)
-print(rsa_pss_test)
-print(dsa_test)
+print("Average Encription time")
+print(format(sum(arc4_test[0])/len(arc4_test), '.12f'))
+print(format(sum(aes_ctr_test[0])/len(aes_ctr_test), '.12f'))
+print(format(sum(aes_ofb_test[0])/len(aes_ofb_test), '.12f'))
+print(format(sum(des_test[0])/len(des_test), '.12f'))
+print(format(sum(aes_test[0])/len(aes_test), '.12f'))
+print(format(sum(rsa_oaep_test[0])/len(rsa_oaep_timing), '.12f'))
+print(format(sum(rsa_pss_test[0])/len(rsa_pss_test), '.12f'))
+print(format(sum(dsa_test[0])/len(dsa_test), '.12f'))
 
+print("Average Decryption time")
+print(format(sum(arc4_test[1])/len(arc4_test), '.12f'))
+print(format(sum(aes_ctr_test[1])/len(aes_ctr_test), '.12f'))
+print(format(sum(aes_ofb_test[1])/len(aes_ofb_test), '.12f'))
+print(format(sum(des_test[1])/len(des_test), '.12f'))
+print(format(sum(aes_test[1])/len(aes_test), '.12f'))
+print(format(sum(rsa_oaep_test[1])/len(rsa_oaep_timing), '.12f'))
+print(format(sum(rsa_pss_test[1])/len(rsa_pss_test), '.12f'))
+print(format(sum(dsa_test[1])/len(dsa_test), '.12f'))
+
+
+print("Average Hashing time")
+print(format(sum(md5_test)/len(md5_test), '.12f'))
+print(format(sum(sha1_test)/len(sha1_test), '.12f'))
+print(format(sum(sha2_test)/len(sha2_test), '.12f'))

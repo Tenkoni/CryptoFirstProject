@@ -67,7 +67,7 @@ print(format(sum(aes_ctr_test[0])/len(aes_ctr_test), '.12f'))
 print(format(sum(aes_ofb_test[0])/len(aes_ofb_test), '.12f'))
 print(format(sum(des_test[0])/len(des_test), '.12f'))
 print(format(sum(aes_test[0])/len(aes_test), '.12f'))
-print(format(sum(rsa_oaep_test[0])/len(rsa_oaep_timing), '.12f'))
+print(format(sum(rsa_oaep_test[0])/len(rsa_oaep_test), '.12f'))
 print(format(sum(rsa_pss_test[0])/len(rsa_pss_test), '.12f'))
 print(format(sum(dsa_test[0])/len(dsa_test), '.12f'))
 
@@ -77,7 +77,7 @@ print(format(sum(aes_ctr_test[1])/len(aes_ctr_test), '.12f'))
 print(format(sum(aes_ofb_test[1])/len(aes_ofb_test), '.12f'))
 print(format(sum(des_test[1])/len(des_test), '.12f'))
 print(format(sum(aes_test[1])/len(aes_test), '.12f'))
-print(format(sum(rsa_oaep_test[1])/len(rsa_oaep_timing), '.12f'))
+print(format(sum(rsa_oaep_test[1])/len(rsa_oaep_test), '.12f'))
 print(format(sum(rsa_pss_test[1])/len(rsa_pss_test), '.12f'))
 print(format(sum(dsa_test[1])/len(dsa_test), '.12f'))
 
@@ -94,11 +94,11 @@ des_test = [(format(x[0], '.22f'), format(x[1], '.22f')) for x in des_test]
 aes_test = [(format(x[0], '.22f'), format(x[1], '.22f')) for x in aes_test]
 dsa_test = [(format(x[0], '.22f'), format(x[1], '.22f')) for x in dsa_test]
 rsa_oaep_test = [(format(x[0], '.22f'), format(x[1], '.22f')) for x in rsa_oaep_test]
-md5_test = [format(x[0], '.22f') for x in md5_test]
-sha1_test = [format(x[0], '.22f') for x in sha1_test]
-sha2_test = [format(x[0], '.22f') for x in sha2_test]
+md5_test = [format(x, '.22f') for x in md5_test]
+sha1_test = [format(x, '.22f') for x in sha1_test]
+sha2_test = [format(x, '.22f') for x in sha2_test]
 rsa_pss_test = [(format(x[0], '.22f'), format(x[1], '.22f')) for x in rsa_pss_test]
-des_test = [(format(x[0], '.22f'), format(x[1], '.22f')) for x in des_test]
+
 
 ##creating csv files for each test
 with open ('Results/arc4.csv', 'w') as out:
@@ -160,7 +160,11 @@ with open ('Results/rsa_pss.csv', 'w') as out:
 	csv_res.writerow(['Signature time', 'Verification Time'])
 	for row in rsa_pss_test:
 		csv_res.writerow(row)
-
+with open ('Results/dsa.csv', 'w') as out:
+	csv_res = csv.writer(out)
+	csv_res.writerow(['Signature time', 'Verification Time'])
+	for row in dsa_test:
+		csv_res.writerow(row)
 with open ('Results/desSi.csv', 'w') as out:
 	csv_res = csv.writer(out)
 	csv_res.writerow(['Signature time', 'Verification Time'])

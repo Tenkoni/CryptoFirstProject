@@ -32,7 +32,7 @@ tv.close()
 
 with open("hash_vectors.elf") as tv:
 	hash_vectors = tv.readlines()
-hash_vectors = [bytes.fromhex(x.strip()) for x in hash_vectors]
+hash_vectors = [bytes(x.strip('\n'), encoding = 'utf8') for x in hash_vectors]
 tv.close()
 ##
 

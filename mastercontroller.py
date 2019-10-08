@@ -92,6 +92,7 @@ aes_ctr_test = [(format(x[0], '.22f'), format(x[1], '.22f')) for x in aes_ctr_te
 aes_ofb_test = [(format(x[0], '.22f'), format(x[1], '.22f')) for x in aes_ofb_test]
 des_test = [(format(x[0], '.22f'), format(x[1], '.22f')) for x in des_test]
 aes_test = [(format(x[0], '.22f'), format(x[1], '.22f')) for x in aes_test]
+dsa_test = [(format(x[0], '.22f'), format(x[1], '.22f')) for x in dsa_test]
 rsa_oaep_test = [(format(x[0], '.22f'), format(x[1], '.22f')) for x in rsa_oaep_test]
 md5_test = [format(x[0], '.22f') for x in md5_test]
 sha1_test = [format(x[0], '.22f') for x in sha1_test]
@@ -160,7 +161,7 @@ with open ('Results/rsa_pss.csv', 'w') as out:
 	for row in rsa_pss_test:
 		csv_res.writerow(row)
 
-with open ('Results/des.csv', 'w') as out:
+with open ('Results/desSi.csv', 'w') as out:
 	csv_res = csv.writer(out)
 	csv_res.writerow(['Signature time', 'Verification Time'])
 	for row in des_test:

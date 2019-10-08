@@ -60,9 +60,9 @@ forAx += resultsSHA2X
 forAx += resultsMD5X
 
 
-resultsSHA1X = resultsSHA1X[1:70]
-resultsSHA2X = resultsSHA2X[1:70]
-resultsMD5X  = resultsMD5X[1:70]
+#resultsSHA1X = resultsSHA1X[1:800]
+#resultsSHA2X = resultsSHA2X[1:800]
+#resultsMD5X  = resultsMD5X[1:800]
 """"
 forAy = []
 forAy += resultsSHA1Y
@@ -71,14 +71,14 @@ forAy += resultsMD5Y
 """
 
 
-ax1.scatter(range(len(resultsSHA1X)), resultsSHA1X, s =10,c = "r", alpha=0.5,label = "SHA1")
-ax1.scatter(range(len(resultsSHA1X)), resultsSHA2X, s =10,c = "b", alpha=0.5, label = "SHA2")
-ax1.scatter(range(len(resultsSHA1X)), resultsMD5X, s =10,c = "g", alpha=0.5, label = "MD5")
+ax1.scatter(range(len(resultsSHA1X)), resultsSHA1X, s =1,c = "r", alpha=0.5,label = "SHA1")
+ax1.scatter(range(len(resultsSHA1X)), resultsSHA2X, s =1,c = "b", alpha=0.5, label = "SHA2")
+ax1.scatter(range(len(resultsSHA1X)), resultsMD5X, s =1,c = "g", alpha=0.5, label = "MD5")
 plt.ylabel('Hashing Time [s]')
 plt.xlabel('N-th Test Vector')
 plt.title('Diggesting time (lower Y is better)')
 
 
-plt.axis([0,len(resultsSHA1X),min(forAx),0.0000028])
+plt.axis([0,1000,min(forAx),0.0000028])
 plt.legend(loc='upper right');
 plt.show()

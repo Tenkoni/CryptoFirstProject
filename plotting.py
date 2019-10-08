@@ -68,7 +68,7 @@ with open('Results/aes_ofb.csv') as csv_fileFour:
 			resultsOFBY.append(float(row[1]))
 			line_count += 1
 
-with open('Results/des.csv') as csv_fileFive:
+with open('Results/desSi.csv') as csv_fileFive:
 	csv_reader = csv.reader(csv_fileFive, delimiter=',')
 	line_count = 0
 	for row in csv_reader:
@@ -100,20 +100,20 @@ forAx += resultsCTRX
 forAx += resultsARCX
 forAx += resultsAESX
 forAx += resultsOFBX
-#forAx += resultsDESX
+forAx += resultsDESX
 
 forAy = []
 forAy += resultsCTRY
 forAy += resultsARCY
 forAy += resultsAESY
 forAy += resultsOFBY
-#forAy += resultsDESY
+forAy += resultsDESY
 
 ax1.scatter(resultsARCX, resultsARCY, s =10,c = "r", alpha=0.5,label = "RC4")
 ax1.scatter(resultsCTRX, resultsCTRY, s =10,c = "b", alpha=0.5, label = "AES CTR")
 ax1.scatter(resultsAESX, resultsAESY, s =10,c = "g", alpha=0.5, label = "AES")
 ax1.scatter(resultsOFBX, resultsOFBY, s =10,c = "y", alpha=0.5, label = "OFB")
-ax1.scatter(resultsDESX, resultsDESY, s =1,c = "#eabfb9", alpha=0.5, label = "DES- (Too big for display)")
+ax1.scatter(resultsDESX, resultsDESY, s =10,c = "#eabfb9", alpha=0.5, label = "DES- (Too big for display)")
 plt.ylabel('Encryption Time [s]')
 plt.xlabel('Decryption Time [s]')
 plt.title('Encryption and Decryption time (closer to the origin is better)')

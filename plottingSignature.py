@@ -14,7 +14,8 @@ resultsPSSX = []
 resultsPSSY = []
 resultsDESX = []
 resultsDESY = []
-
+resultsDSAX = []
+resultsDSAY = []
 
 
 with open('Results/rsa_pss.csv') as csv_file:
@@ -41,19 +42,35 @@ with open('Results/des.csv') as csv_fileFive:
 			resultsDESY.append(float(row[1]))
 			line_count += 1
 
+with open('Results/dsa.csv') as csv_fileFive:
+	csv_reader = csv.reader(csv_fileFive, delimiter=',')
+	line_count = 0
+	for row in csv_reader:
+		if line_count == 0:
+			algoName = row
+			line_count += 1
+		else:
+			resultsDSAX.append(float(row[0]))
+			resultsDSAY.append(float(row[1]))
+			line_count += 1
+
 resultsDESX = resultsDESX[0:160]
 resultsDESY = resultsDESY[0:160]
 forAx = []
 forAx += resultsPSSX
-forAx += resultsDESX
+#forAx += resultsDESX
+forAx += resultsDSAX
 
 forAy = []
 forAy += resultsPSSY
-forAy += resultsDESY
+#forAy += resultsDESY
+forAy += resultsDSAY
 
 
 ax1.scatter(resultsPSSX, resultsPSSY, s =10,c = "r", alpha=0.5, label = "RSA-PSS")
-ax1.scatter(resultsDESX, resultsDESY, s =10,c = "b", alpha=0.5, label = "DES")
+#ax1.scatter(resultsDESX, resultsDESY, s =10,c = "b", alpha=0.5, label = "DES")
+ax1.scatter(resultsDSAX, resultsDSAY, s =10,c = "g", alpha=0.5, label = "DSA")
+
 
 plt.ylabel('Signature Time [s]')
 plt.xlabel('Verification Time [s]')
